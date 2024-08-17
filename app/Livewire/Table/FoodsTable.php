@@ -21,7 +21,7 @@ class FoodsTable extends Component
         $photo,
         $categories,
         $dataFood,
-        $isEdit = false,$idFood;
+        $isEdit = false, $idFood;
 
     public function mount()
     {
@@ -37,14 +37,17 @@ class FoodsTable extends Component
         ]);
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $data = Food::find($id);
         $data->delete();
         $this->dispatch('foodUpdate');
     }
 
-    public function setFalse() {
+    public function setFalse()
+    {
         $this->isEdit = false;
+        $this->reset('name', 'description', 'price', 'quantity');
     }
 
     public function setFood($id)
@@ -63,8 +66,8 @@ class FoodsTable extends Component
     {
         $this->validate([
             'name' => 'required',
-            'photo' => 'image|max:1024',
         ]);
+
         $uuid = Uuid::uuid4()->toString();
         if ($this->isEdit) {
             $data = Food::find($this->dataFood->id);
@@ -80,7 +83,10 @@ class FoodsTable extends Component
             }
             $data->save();
         } else {
-
+            if (!$this->photo) {
+                session()->flash('error', 'Photo is required');
+                return;
+            }
 
             $data = new Food();
             $data->category_id = $this->selectedCat;
@@ -90,10 +96,8 @@ class FoodsTable extends Component
             $data->price = $this->price;
             $data->stock = $this->quantity;
             $data->status = 'on';
-            if ($this->photo) {
-                $this->photo->storeAs('photos', $uuid . '.' . $this->photo->extension());
-                $data->image = $uuid . '.' . $this->photo->extension();
-            }
+            $this->photo->storeAs('photos', $uuid . '.' . $this->photo->extension());
+            $data->image = $uuid . '.' . $this->photo->extension();
             $data->save();
         }
 

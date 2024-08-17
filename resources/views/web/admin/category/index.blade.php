@@ -1,5 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <livewire:table.categories-table />
+    <div class="container-xxl">
+        <livewire:table.categories-table />
+    </div>
 @endsection

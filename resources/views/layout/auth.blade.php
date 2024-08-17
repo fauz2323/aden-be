@@ -1,54 +1,80 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>SignIn - Geex Dashboard</title>
 
-	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Log In | Tapeli - Responsive Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
+    <meta name="author" content="Zoyothemes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-	<!-- inject:css-->
-	<link rel="stylesheet" href="{{asset('assets/vendor/css/bootstrap/bootstrap.css')}}">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-	<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-	<!-- endinject -->
-	<link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicon.svg')}}">
-	<!-- Fonts -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconscout/unicons@4.0.8/css/line.min.css">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+
+    <!-- App css -->
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons -->
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     @livewireStyles()
-    @stack('css')
 </head>
 
-<body class="geex-dashboard authentication-page">
-	<main class="geex-content">
-		<div class="geex-content__authentication">
-			<div class="geex-content__authentication__content">
-				<div class="geex-content__authentication__content__wrapper">
-					<div class="geex-content__authentication__content__logo">
-						<a href="index.html">
-							<img class="logo-lite" src="{{asset('assets/img/logo-dark.svg')}}" alt="logo">
-							<img class="logo-dark" src="{{asset('assets/img/logo-lite.svg')}}" alt="logo">
-						</a>
-					</div>
-					@yield('content')
-				</div>
-			</div>
-			<div class="geex-content__authentication__img">
-				<img src="{{asset('assets/img/authentication.svg')}}" alt="">
-			</div>
-		</div>
-	</main>
+<body class="bg-white">
+    <!-- Begin page -->
+    <div class="account-page">
+        <div class="container-fluid p-0">
+            <div class="row align-items-center g-0">
+                <div class="col-xl-5">
+                    <div class="row">
+                        <div class="col-md-7 mx-auto">
+                            <div class="mb-0 border-0 p-md-5 p-lg-0 p-4">
+                                <div class="mb-4 p-0">
+                                    <a href="index.html" class="auth-logo">
+                                        <img src="assets/images/logo-dark.png" alt="logo-dark" class="mx-auto"
+                                            height="28" />
+                                    </a>
+                                </div>
 
-	<!-- inject:js-->
-	<script src="{{asset('assets/vendor/js/jquery/jquery-3.5.1.min.js')}}"></script>
-	<script src="{{asset('assets/vendor/js/jquery/jquery-ui.js')}}"></script>
-	<script src="{{asset('assets/vendor/js/bootstrap/bootstrap.min.js')}}"></script>
-	<script src="{{asset('assets/js/main.js')}}"></script>
+                                <div class="pt-0">
+                                    @yield('content')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-7">
+                    <div class="account-page-bg p-md-5 p-4">
+                        <div class="text-center">
+                            <h3 class="text-dark mb-3 pera-title">Quick, Effective, and Productive With Tapeli Admin
+                                Dashboard</h3>
+                            <div class="auth-image">
+                                <img src="assets/images/authentication.svg" class="mx-auto img-fluid" alt="images">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- END wrapper -->
+
+    <!-- Vendor -->
+    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+
+    <!-- App js-->
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     @livewireScripts()
-    @stack('script')
-	<!-- endinject-->
+
 </body>
 
 </html>

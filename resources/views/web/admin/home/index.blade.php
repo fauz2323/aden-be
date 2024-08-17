@@ -1,35 +1,77 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="geex-content__section-wrapper">
-        <div class="geex-content__feature mb-40">
-            <div class="geex-content__feature__card">
-                <div class="geex-content__feature__card__text">
-                    <p class="geex-content__feature__card__subtitle">Orders</p>
-                    <h4 class="geex-content__feature__card__title">{{ $order }}</h4>
-                </div>
-                <div class="geex-content__feature__card__img">
-                    <img src="assets/img/feature/feature-2.svg" alt="feature" />
-                </div>
-            </div>
-            <div class="geex-content__feature__card">
-                <div class="geex-content__feature__card__text">
-                    <p class="geex-content__feature__card__subtitle">Category Food</p>
-                    <h4 class="geex-content__feature__card__title">{{ $categoryTotal }}</h4>
-                </div>
-                <div class="geex-content__feature__card__img">
-                    <img src="assets/img/feature/feature-3.svg" alt="feature" />
-                </div>
-            </div>
-            <div class="geex-content__feature__card">
-                <div class="geex-content__feature__card__text">
-                    <p class="geex-content__feature__card__subtitle">Foods</p>
-                    <h4 class="geex-content__feature__card__title">{{$food}}</h4>
-                </div>
-                <div class="geex-content__feature__card__img">
-                    <img src="assets/img/feature/feature-1.svg" alt="feature" />
-                </div>
+    <div class="container-xxl">
+
+        <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
+            <div class="flex-grow-1">
+                <h4 class="fs-18 fw-semibold m-0">Dashboard</h4>
             </div>
         </div>
-    </div>
+
+        <!-- start row -->
+        <div class="row">
+            <div class="col-md-12 col-xl-12">
+                <div class="row g-3">
+
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="fs-14 mb-1">Users Apps</div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline mb-2">
+                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">91.6K</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="fs-14 mb-1">Foods</div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline mb-2">
+                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ $food }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="fs-14 mb-1">Foods Category</div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline mb-2">
+                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ $categoryTotal }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="fs-14 mb-1">Order</div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline mb-2">
+                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">91.6K</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div> <!-- end sales -->
+        </div> <!-- end row -->
+    </div> <!-- container-fluid -->
 @endsection

@@ -1,72 +1,75 @@
-<div>
-    <div class="container mb-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="geex-content__form-title">
-                    <h3>Categories</h3>
+<div class="col-xl">
+    <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
+        <div class="flex-grow-1">
+            <div class="row">
+                <div class="col">
+                    <h4 class="fs-18 fw-semibold m-0">Category</h4>
                 </div>
-            </div>
-            <div class="col-12">
-                <div class="geex-content__form-title">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="col d-flex flex-row-reverse bd-highlight">
+                    <button type="button" wire:click='setFalse' class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
                         Add Category
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="geex-content__section geex-content__form table-responsive">
 
-        <table class="table-reviews-geex-1">
-            <thead>
-                <tr style="width: 100%;">
-                    <th style="width: 20%;">Category</th>
-                    <th style="width: 20%;">Date Add</th>
-                    <th style="width: 20%;">Action</th>
-                </tr>
-            </thead>
-            <tbody class="">
-                @foreach ($categories as $category)
-                <tr>
-                    <td>
-                        <div class="author-area">
-                            <p>{{ $category->name }}</p>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="designation">{{ $category->created_at }}</span>
-                    </td>
-                    <td>
-                        <span class="name">
-                            <button type="button" wire:click="setCat({{ $category->id }})" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Edit
-                            </button>
-                        </span>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Category List</h5>
+        </div><!-- end card header -->
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Date Added</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($categories as $category)
+                            <tr>
+                                <td>{{ $category->name }}</td>
+                                <td>{{ $category->created_at->format('d/m/Y') }}</td>
+                                <td>
+                                    <button type="button" wire:click="setCat('{{ $category->id }}')"
+                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Edit Category
+                                    </button>
+                                    <button wire:click="delete({{ $category->id }})" class="btn btn-danger">Delete
+                                        Category</button>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-
-    <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form wire:submit.prevent="submit">
+                <form wire:submit.prevent='submit'>
                     <div class="modal-body">
-                        <div class="geex-content__form__wrapper__item geex-content__form__right">
-                            <div class="geex-content__form__single">
-                                <h4 class="geex-content__form__single__label">Category</h4>
-                                <div class="geex-content__form__single__box mb-20">
-                                    <input placeholder="Insert Category" wire:model='name' class="form-control" id="geex-input1" />
-                                    <input type="file" class="form-control" wire:model='photo' />
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Category Name</label>
+                            <input type="text" class="form-control" wire:model='name'>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Image</label>
+                            <input type="file" class="form-control" wire:model='photo'>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -77,13 +80,13 @@
             </div>
         </div>
     </div>
-
 </div>
 
 
 @push('script')
     <script>
         window.addEventListener('closeModal', event => {
+            console.log('closeModal');
             $('#exampleModal').modal('hide');
         });
     </script>
