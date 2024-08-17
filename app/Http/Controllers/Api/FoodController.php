@@ -32,7 +32,7 @@ class FoodController extends Controller
             'uuid' => 'required'
         ]);
 
-        $food = Food::with('category')->where('uuid', $request->uuid)->first();
+        $food = Food::where('uuid', $request->uuid)->with('category')->first();
 
         return response()->json([
             'message' => 'Success get Food Data',

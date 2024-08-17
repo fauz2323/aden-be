@@ -16,7 +16,11 @@ Route::prefix('v1')->group(function () {
 
         Route::get('food', [App\Http\Controllers\Api\FoodController::class, 'getFood']);
         Route::post('food/uuid', [App\Http\Controllers\Api\FoodController::class, 'getFoodByUuid']);
-        Route::get('food/type', [App\Http\Controllers\Api\FoodController::class, 'foodType']);
-        Route::post('food/category', [App\Http\Controllers\Api\FoodController::class, 'getFoodByCategory']);
+        Route::get('food/category', [App\Http\Controllers\Api\FoodController::class, 'foodType']);
+        Route::post('food/byCategory', [App\Http\Controllers\Api\FoodController::class, 'getFoodByCategory']);
+
+        //order
+        Route::post('add/to/cart', [App\Http\Controllers\Api\OrderController::class, 'addToCart']);
+        Route::get('get/cart', [App\Http\Controllers\Api\OrderController::class, 'getCart']);
     });
 });
