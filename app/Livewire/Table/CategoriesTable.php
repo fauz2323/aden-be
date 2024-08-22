@@ -3,6 +3,7 @@
 namespace App\Livewire\Table;
 
 use App\Models\Category;
+use App\Service\FirebaseServices;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -56,7 +57,10 @@ class CategoriesTable extends Component
         $data->slug = Str::slug($this->name);
         if ($this->photo) {
             $this->photo->storeAs('photos', $uuid . '.' . $this->photo->extension());
-            $data->icon = $uuid . '.' . $this->photo->extension() ?? '-';
+            $name = $uuid . '.' . $this->photo->extension() ?? '-';
+            $data->icon = $name;
+            $firebaseService = new FirebaseServices;
+            $$firebaseService->uploadFile($this->photo,$name);
         }
         $data->save();
         $this->reset();

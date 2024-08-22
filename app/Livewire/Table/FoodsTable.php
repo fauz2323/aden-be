@@ -4,6 +4,7 @@ namespace App\Livewire\Table;
 
 use App\Models\Category;
 use App\Models\Food;
+use App\Service\FirebaseServices;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -21,7 +22,8 @@ class FoodsTable extends Component
         $photo,
         $categories,
         $dataFood,
-        $isEdit = false, $idFood;
+        $isEdit = false,
+        $idFood;
 
     public function mount()
     {
@@ -79,7 +81,10 @@ class FoodsTable extends Component
             $data->status = 'on';
             if ($this->photo) {
                 $this->photo->storeAs('photos', $uuid . '.' . $this->photo->extension());
-                $data->image = $uuid . '.' . $this->photo->extension();
+                $imageName = $uuid . '.' . $this->photo->extension();
+                $data->image = $imageName;
+                $firebaseService = new FirebaseServices();
+                $$firebaseService->uploadFile($this->photo, $imageName);
             }
             $data->save();
         } else {
@@ -97,7 +102,10 @@ class FoodsTable extends Component
             $data->stock = $this->quantity;
             $data->status = 'on';
             $this->photo->storeAs('photos', $uuid . '.' . $this->photo->extension());
-            $data->image = $uuid . '.' . $this->photo->extension();
+            $imageName = $uuid . '.' . $this->photo->extension();
+            $data->image = $imageName;
+            $firebaseService = new FirebaseServices();
+            $firebaseService->uploadFile($this->photo, $imageName);
             $data->save();
         }
 

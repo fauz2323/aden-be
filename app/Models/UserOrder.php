@@ -27,6 +27,6 @@ class UserOrder extends Model
      */
     public function orderList()
     {
-        return $this->hasMany(UserOrderList::class, 'order_id', 'id');
+        return $this->hasMany(UserOrderList::class, 'user_order_id', 'id');
     }
 }

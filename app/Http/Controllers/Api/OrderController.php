@@ -17,6 +17,13 @@ class OrderController extends Controller
             'quantity'=>'required',
         ]);
 
+        $checkOrder = UserOrder::where('user_id', auth()->user()->id)->where('status', 'pending')->first();
+        if ($checkOrder) {
+            return response()->json([
+                'message' => 'please make payment',
+            ],222);
+        }
+
         $food = Food::where('uuid', $request->uuid)->first();
 
         if (!$food) {
@@ -90,11 +97,11 @@ class OrderController extends Controller
             return response()->json([
                 'message' => 'please make payment',
                 'order' => $PaymentOrder,
-            ],222);
+            ]);
         } else {
             return response()->json([
                 'message' => '-',
-            ]);
+            ],222);
         }
     }
 }
