@@ -22,5 +22,6 @@ Route::prefix('v1')->group(function () {
         //order
         Route::post('add/to/cart', [App\Http\Controllers\Api\OrderController::class, 'addToCart']);
         Route::get('get/cart', [App\Http\Controllers\Api\OrderController::class, 'getCart']);
+        Route::get('set/order', [App\Http\Controllers\Api\OrderController::class, 'setOrder']);
     });
 });

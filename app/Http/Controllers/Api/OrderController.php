@@ -58,11 +58,43 @@ class OrderController extends Controller
 
         foreach ($cart as $key => $value) {
             $order_list = new UserOrderList();
-            $order_list->order_id = $order->id;
+            $order_list->user_order_id = $order->id;
             $order_list->food_id = $value->food_id;
             $order_list->quantity = $value->quantity;
             $order_list->price = $value->price;
             $order_list->save();
+
+            $value->delete();
+        }
+
+        return response()->json([
+            'message' => 'Success set order, please wait for confirmation',
+            'order' => $order,
+        ]);
+    }
+
+    function makePayment() {
+        $PaymentOrder = UserOrder::where('user_id', auth()->user()->id)->where('status', 'pending')->with('orderList')->first();
+        $PaymentOrder->status = 'paid';
+        $PaymentOrder->save();
+
+        return response()->json([
+            'message' => 'Success make payment',
+            'order' => $PaymentOrder
+        ]);
+    }
+
+    function checkPayment() {
+        $PaymentOrder = UserOrder::where('user_id', auth()->user()->id)->where('status', 'pending')->first();
+        if ($PaymentOrder) {
+            return response()->json([
+                'message' => 'please make payment',
+                'order' => $PaymentOrder,
+            ],222);
+        } else {
+            return response()->json([
+                'message' => '-',
+            ]);
         }
     }
 }
