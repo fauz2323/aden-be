@@ -9,7 +9,7 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
-    Route::post('register',[App\Http\Controllers\Api\AuthController::class, 'register']);
+    Route::post('register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('auth', [App\Http\Controllers\Api\AuthController::class, 'auth']);
@@ -23,7 +23,7 @@ Route::prefix('v1')->group(function () {
         Route::post('add/to/cart', [App\Http\Controllers\Api\OrderController::class, 'addToCart']);
         Route::get('get/cart', [App\Http\Controllers\Api\OrderController::class, 'getCart']);
         Route::get('set/order', [App\Http\Controllers\Api\OrderController::class, 'setOrder']);
+        Route::post('get/order', [App\Http\Controllers\Api\OrderController::class, 'getDetailOrder']);
         Route::get('make/payment', [App\Http\Controllers\Api\OrderController::class, 'makePayment']);
-
     });
 });

@@ -11,17 +11,18 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    function addToCart(Request $request) {
+    function addToCart(Request $request)
+    {
         $request->validate([
-            'uuid'=>'required',
-            'quantity'=>'required',
+            'uuid' => 'required',
+            'quantity' => 'required',
         ]);
 
         $checkOrder = UserOrder::where('user_id', auth()->user()->id)->where('status', 'pending')->first();
         if ($checkOrder) {
             return response()->json([
                 'message' => 'please make payment',
-            ],222);
+            ], 222);
         }
 
         $food = Food::where('uuid', $request->uuid)->first();
@@ -45,7 +46,8 @@ class OrderController extends Controller
         ]);
     }
 
-    function getCart() {
+    function getCart()
+    {
         $cart = UserCart::where('user_id', auth()->user()->id)->with('food')->get();
 
         return response()->json([
@@ -54,12 +56,14 @@ class OrderController extends Controller
         ]);
     }
 
-    function setOrder() {
+    function setOrder()
+    {
         $cart = UserCart::where('user_id', auth()->user()->id)->with('food')->get();
 
+        $rand = rand(100, 999);
         $order = new UserOrder();
         $order->user_id = auth()->user()->id;
-        $order->total_price = $cart->sum('price');
+        $order->total_price = $cart->sum('price') + $rand;
         $order->status = 'pending';
         $order->save();
 
@@ -80,7 +84,21 @@ class OrderController extends Controller
         ]);
     }
 
-    function makePayment() {
+    function getDetailOrder(Request $request)
+    {
+        $request->validate([
+            'order_id' => 'required'
+        ]);
+        $PaymentOrder = UserOrder::with('orderList')->find($request->order_id);
+
+        return response()->json([
+            'message' => 'Success get payment',
+            'order' => $PaymentOrder
+        ]);
+    }
+
+    function makePayment()
+    {
         $PaymentOrder = UserOrder::where('user_id', auth()->user()->id)->where('status', 'pending')->with('orderList')->first();
         $PaymentOrder->status = 'paid';
         $PaymentOrder->save();
@@ -91,7 +109,8 @@ class OrderController extends Controller
         ]);
     }
 
-    function checkPayment() {
+    function checkPayment()
+    {
         $PaymentOrder = UserOrder::where('user_id', auth()->user()->id)->where('status', 'pending')->first();
         if ($PaymentOrder) {
             return response()->json([
@@ -101,7 +120,7 @@ class OrderController extends Controller
         } else {
             return response()->json([
                 'message' => '-',
-            ],222);
+            ], 222);
         }
     }
 }

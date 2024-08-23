@@ -60,7 +60,7 @@ class CategoriesTable extends Component
             $name = $uuid . '.' . $this->photo->extension() ?? '-';
             $data->icon = $name;
             $firebaseService = new FirebaseServices;
-            $$firebaseService->uploadFile($this->photo,$name);
+            $firebaseService->uploadFile($this->photo, $name);
         }
         $data->save();
         $this->reset();
