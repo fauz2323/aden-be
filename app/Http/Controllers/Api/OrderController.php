@@ -58,7 +58,20 @@ class OrderController extends Controller
 
     function setOrder()
     {
+        $checkOrder = UserOrder::where('user_id', auth()->user()->id)->where('status', 'pending')->first();
+        if ($checkOrder) {
+            return response()->json([
+                'message' => 'please make payment',
+            ], 222);
+        }
+
         $cart = UserCart::where('user_id', auth()->user()->id)->with('food')->get();
+
+        if ($cart->count() == 0) {
+            return response()->json([
+                'message' => 'Cart is empty',
+            ], 222);
+        }
 
         $rand = rand(100, 999);
         $order = new UserOrder();
@@ -75,7 +88,7 @@ class OrderController extends Controller
             $order_list->price = $value->price;
             $order_list->save();
 
-            $value->delete();
+            // $value->delete();
         }
 
         return response()->json([
