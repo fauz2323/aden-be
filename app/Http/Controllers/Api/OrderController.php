@@ -61,8 +61,9 @@ class OrderController extends Controller
         $checkOrder = UserOrder::where('user_id', auth()->user()->id)->where('status', 'pending')->first();
         if ($checkOrder) {
             return response()->json([
-                'message' => 'please make payment',
-            ], 222);
+                'message' => 'Success set order, please wait for confirmation',
+                'order' => $checkOrder,
+            ]);
         }
 
         $cart = UserCart::where('user_id', auth()->user()->id)->with('food')->get();
@@ -100,9 +101,9 @@ class OrderController extends Controller
     function getDetailOrder(Request $request)
     {
         $request->validate([
-            'order_id' => 'required'
+            'id' => 'required'
         ]);
-        $PaymentOrder = UserOrder::with('orderList')->find($request->order_id);
+        $PaymentOrder = UserOrder::with('orderList')->find($request->id);
 
         return response()->json([
             'message' => 'Success get payment',
