@@ -25,5 +25,6 @@ Route::prefix('v1')->group(function () {
         Route::get('set/order', [App\Http\Controllers\Api\OrderController::class, 'setOrder']);
         Route::post('get/order', [App\Http\Controllers\Api\OrderController::class, 'getDetailOrder']);
         Route::get('make/payment', [App\Http\Controllers\Api\OrderController::class, 'makePayment']);
+        Route::get('all/order', [App\Http\Controllers\Api\OrderController::class, 'getAllOrders']);
     });
 });

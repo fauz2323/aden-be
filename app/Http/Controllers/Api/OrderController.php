@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Food;
+use App\Models\User;
 use App\Models\UserCart;
 use App\Models\UserOrder;
 use App\Models\UserOrderList;
@@ -136,5 +137,16 @@ class OrderController extends Controller
                 'message' => '-',
             ], 222);
         }
+    }
+
+    function getAllOrders() {
+        $user = User::find(auth()->user()->id);
+
+        $orders = UserOrder::where('user_id', $user->id)->with('orderList')->get();
+
+        return response()->json([
+            'message' => 'Success get all orders',
+            'orders' => $orders
+        ]);
     }
 }
