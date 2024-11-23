@@ -144,7 +144,7 @@ class OrderController extends Controller
 
         $orders = UserOrder::where('user_id', $user->id)->with(['orderList'=>function($query){
             $query->with(['food'=>function($query){
-                $query->select('name');
+                $query->select('name')->first();
             }]);
         }])->get();
 
