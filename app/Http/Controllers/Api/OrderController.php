@@ -118,6 +118,11 @@ class OrderController extends Controller
         $PaymentOrder->status = 'paid';
         $PaymentOrder->save();
 
+        $cart = UserCart::where('user_id', auth()->user()->id)->get();
+        foreach ($cart as $key => $value) {
+            $value->delete();
+        }
+
         return response()->json([
             'message' => 'Success make payment',
             'order' => $PaymentOrder
@@ -143,9 +148,7 @@ class OrderController extends Controller
         $user = User::find(auth()->user()->id);
 
         $orders = UserOrder::where('user_id', $user->id)->with(['orderList'=>function($query){
-            $query->with(['food'=>function($query){
-                $query->select('name')->first();
-            }]);
+            $query->with('food');
         }])->get();
 
         return response()->json([
