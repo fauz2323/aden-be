@@ -143,7 +143,7 @@ class OrderController extends Controller
         $user = User::find(auth()->user()->id);
 
         $orders = UserOrder::where('user_id', $user->id)->with(['orderList'=>function($query){
-            $query->food->name;
+            $query->with('food.name');
         }])->get();
 
         return response()->json([
