@@ -142,7 +142,9 @@ class OrderController extends Controller
     function getAllOrders() {
         $user = User::find(auth()->user()->id);
 
-        $orders = UserOrder::where('user_id', $user->id)->with('orderList')->get();
+        $orders = UserOrder::where('user_id', $user->id)->with(['orderList'=>function($query){
+            $query->with('food');
+        }])->get();
 
         return response()->json([
             'message' => 'Success get all orders',
