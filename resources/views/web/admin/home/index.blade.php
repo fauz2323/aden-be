@@ -22,7 +22,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-baseline mb-2">
-                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">91.6K</div>
+                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ $user }}</div>
                                 </div>
                             </div>
                         </div>
@@ -60,11 +60,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="fs-14 mb-1">Order</div>
+                                    <div class="fs-14 mb-1">Pending Order</div>
                                 </div>
 
                                 <div class="d-flex align-items-baseline mb-2">
-                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">91.6K</div>
+                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ $order }}</div>
                                 </div>
                             </div>
                         </div>

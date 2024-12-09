@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    //
+    function index() {
+        return view('web.admin.profile.index');
+    }
 }

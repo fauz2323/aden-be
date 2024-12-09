@@ -19,4 +19,6 @@ Route::middleware('auth')->group(function () {
     Route::get('food',[App\Http\Controllers\Admin\FoodController::class, 'index'])->name('food');
     Route::get('category',[App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('category');
     Route::get('order-list',[App\Http\Controllers\Admin\OrderController::class, 'index'])->name('order');
+
+    Route::get('profile',[App\Http\Controllers\Admin\ProfileController::class, 'index'])->name('profile');
 });

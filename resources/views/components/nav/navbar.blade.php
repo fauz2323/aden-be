@@ -38,7 +38,7 @@
             <div class="collapse" id="sidebarDashboards2">
                 <ul class="nav-second-level">
                     <li>
-                        <a href="index.html" class="tp-link">Settings</a>
+                        <a href="{{route('profile')}}" class="tp-link">Settings</a>
                     </li>
                 </ul>
             </div>
